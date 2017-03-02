@@ -125,7 +125,7 @@ def reply_exchange(e):
     exchange = json.loads(fp.read().decode("utf8"))
     fp.close()
 
-    s = '[현재 환율]'
+    s = '[현재 환율!]'
     for c in exchange['query']['results']['rate']:
         if c['Name'] == 'JPY/KRW':
             s += '\n' + c['Name'][:3] + ': ' + '{0:.2f}'.format(float(c['Rate']) * 100)
