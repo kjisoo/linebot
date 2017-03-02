@@ -65,6 +65,7 @@ def callback():
 @app.route('/update', methods=['GET'])
 def update():
     os.system('sh update.sh')
+    return 'OK'
 
 
 @handler.add(MessageEvent, message=TextMessage)
