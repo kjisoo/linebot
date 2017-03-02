@@ -135,14 +135,14 @@ def reply_exchange(e):
     e.reply(s)
 
 
-def reply_weather(e):
-    fp = urllib.request.urlopen(
-        'http://www.kweather.co.kr/forecast/forecast_lifestyle.html')
-    body = fp.read()
-    fp.close()
-
-    soup = BeautifulSoup(body, 'html.parser')
-    e.reply(soup.find(class_='lifestyle_condition_content').text.strip())
+# def reply_weather(e):
+#     fp = urllib.request.urlopen(
+#         'http://www.kweather.co.kr/forecast/forecast_lifestyle.html')
+#     body = fp.read()
+#     fp.close()
+#
+#     soup = BeautifulSoup(body, 'html.parser')
+#     e.reply(soup.find(class_='lifestyle_condition_content').text.strip())
 
 
 if __name__ == "__main__":
