@@ -1,4 +1,6 @@
 import json
+import os
+
 from flask import Flask, request, abort
 import urllib.request
 from bs4 import BeautifulSoup
@@ -14,6 +16,7 @@ from linebot.models import (
 )
 
 import settings
+
 
 class Event:
     def __init__(self, event):
@@ -34,10 +37,12 @@ class Event:
     def reply(self, text):
         line_bot_api.reply_message(self.reply_token, TextSendMessage(text=text))
 
+
 app = Flask(__name__)
 line_bot_api = LineBotApi(settings.CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.CHANNEL_SECRET)
 prev_message = ''
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -55,6 +60,11 @@ def callback():
         abort(400)
 
     return 'OK'
+
+
+@app.route('/update', methods=['GET'])
+def update():
+    os.system('sh update.sh')
 
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -132,6 +142,7 @@ def reply_weather(e):
 
     soup = BeautifulSoup(body, 'html.parser')
     e.reply(soup.find(class_='lifestyle_condition_content').text.strip())
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
