@@ -133,11 +133,10 @@ def reply_exchange(e):
 def reply_weather(e):
     fp = urllib.request.urlopen(
         'http://www.kweather.co.kr/forecast/forecast_lifestyle.html')
-    body = fp.read()
+    body = fp.read().decode('utf-8', 'ignore')
     fp.close()
 
     soup = BeautifulSoup(body, 'html.parser')
-    print(soup.find(class_='lifestyle_condition_content').text.strip())
     e.reply(soup.find(class_='lifestyle_condition_content').text.strip())
 
 
