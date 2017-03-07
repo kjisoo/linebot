@@ -69,7 +69,6 @@ def handle_message(event):
     e = Event(event)
     global prev_message
 
-    prev_message = e.message_text
     if '환율' in e.message_text:
         reply_exchange(e)
     elif '인테일러' == e.message_text:
@@ -111,8 +110,9 @@ def handle_message(event):
     elif '날씨' in e.message_text:
         reply_weather(e)
 
-    if prev_message == e.message_text:
+    elif prev_message == e.message_text:
         e.reply(prev_message)
+        prev_message = e.message_text
         return
 
 
