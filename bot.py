@@ -111,6 +111,8 @@ def handle_message(event):
         e.reply('프할배 굴러가는 소리좀 안나게 해라!')
     elif '한진수' in e.message_text:
         e.reply('진수짜응')
+    elif '굳밤' in e.message_text:
+        e.reply('네, 주인님 나옹!')
     elif len(e.message_text) == 2 and e.message_text[0] == e.message_text[1]:
         e.reply(e.message_text)
     elif '날씨' in e.message_text:
