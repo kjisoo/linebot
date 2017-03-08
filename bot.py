@@ -112,7 +112,7 @@ def handle_message(event):
     elif '한진수' in e.message_text:
         e.reply('진수짜응')
     elif '굳밤' in e.message_text:
-        e.reply('네, 주인님 나옹!')
+        e.reply('소대 취침준비 됐나?')
     elif len(e.message_text) == 2 and e.message_text[0] == e.message_text[1]:
         e.reply(e.message_text)
     elif '날씨' in e.message_text:
