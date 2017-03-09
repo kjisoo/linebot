@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 
@@ -117,6 +118,9 @@ def handle_message(event):
         e.reply(e.message_text)
     elif '날씨' in e.message_text:
         reply_weather(e)
+    elif '그날이 올까' in e.message_text:
+        reply_dday(e)
+
 
 def reply_exchange(e):
     fp = urllib.request.urlopen(
@@ -141,6 +145,20 @@ def reply_weather(e):
 
     soup = BeautifulSoup(body, 'html.parser')
     e.reply(soup.find(class_='lifestyle_condition_content').text.strip())
+
+
+def reply_dday(e):
+    ddays = [('지수 병특 종료', '2019-09-13')]
+    reply_messages = []
+    for dday in ddays:
+        event_date = datetime.datetime.strptime(dday[1], '%Y-%m-%d')
+        delta_date = event_date - datetime.datetime.now()
+        days = delta_date.days + 1
+        if days > 0:
+            reply_messages.append('{0} {1}일'.format(dday[0], days))
+
+    if reply_messages:
+        e.reply('\n'.join(reply_messages))
 
 
 if __name__ == "__main__":
